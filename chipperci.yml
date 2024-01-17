@@ -34,4 +34,4 @@ pipeline:
     cmd: npm run lint
 
   - name: Run Tests
-    cmd: phpunit
+    cmd: ./vendor/bin/pest
