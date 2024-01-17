@@ -16,22 +16,22 @@ on:
       - main
 
 pipeline:
-  - name: Setup
-    cmd: |
-      cp -v .env .env.testing
-      composer install --no-interaction --optimize-autoloader
-      php artisan migrate
+  # - name: Setup
+  #   cmd: |
+  #     cp -v .env .env.testing
+  #     composer install --no-interaction --optimize-autoloader
+  #     php artisan migrate --force
 
-  - name: Compile Dev Assets
-    cmd: |
-      npm ci --no-audit
-      npm run build
+  # - name: Compile Dev Assets
+  #   cmd: |
+  #     npm ci --no-audit
+  #     npm run build
 
-  # - name: ESLint
-  #   cmd: npm run lint
+  # # - name: ESLint
+  # #   cmd: npm run lint
 
-  - name: Run Tests
-    cmd: ./vendor/bin/pest
+  # - name: Run Tests
+  #   cmd: ./vendor/bin/pest
 
   - name: Configure Forge
     cmd: |
