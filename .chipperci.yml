@@ -16,17 +16,17 @@ on:
       - main
 
 pipeline:
-  # - name: Setup
-  #   cmd: |
-  #     cp -v .env
-  #     composer install -q --no-interaction --prefer-dist --optimize-autoloader
-  #     php artisan key:generate
-  #     php artisan migrate:seed
+  - name: Setup
+    cmd: |
+      cp -v .env
+      composer install -q --no-interaction --prefer-dist --optimize-autoloader
+      php artisan key:generate
+      php artisan migrate --force
 
-  # - name: Compile Dev Assets
-  #   cmd: |
-  #     npm ci --no-audit
-  #     npm run build
+  - name: Compile Dev Assets
+    cmd: |
+      npm ci --no-audit
+      npm run build
 
   # - name: ESLint
   #   cmd: npm run lint
