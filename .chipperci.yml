@@ -1,16 +1,16 @@
-# Rename this file .chipperci.yml
-# and put it in the root of your project
 version: 1
 
 environment:
   php: 8.2
-  node: 20
+  node: 21
 
 services:
-  - mysql: 8
   - redis:
+  - mysql: 8.1
 
 on:
+  pull_request:
+    branches: .*
   push:
     branches:
       - main
@@ -18,34 +18,27 @@ on:
 pipeline:
   - name: Setup
     cmd: |
-      cp -v .env.example .env
-
-      composer install --no-interaction --prefer-dist --optimize-autoloader
-
+      cp -v .env
+      composer install -q --no-interaction --prefer-dist --optimize-autoloader
       php artisan key:generate
+      php artisan migrate:seed
+
+  - name: Compile Dev Assets
+    cmd: |
+      npm ci --no-audit
+      npm run dev
+
+  - name: ESLint
+    cmd: npm run lint
+
+  - name: Run Tests
+    cmd: ./vendor/bin/pest
 
   - name: Configure Forge
     cmd: |
       echo $SSH_PRIVATE_KEY > ~/.ssh/id_forge
       chmod 0600 ~/.ssh/id_forge
       composer global require laravel/forge-cli
-
-  - name: Assets
-    cmd: |
-      # Typically only needed if your mix-manifest.json file is in .gitignore
-      if [[ -f "yarn.lock" ]]; then
-          yarn
-          yarn build # Vite
-          # yarn dev # Mix
-      else
-          npm ci --no-audit
-          npm run build # Vite
-          # npm run dev # Mix
-      fi
-
-  - name: PHPUnit
-    cmd: |
-      ./vendor/bin/pest
 
   - name: Deploy
     cmd: |
