@@ -2,34 +2,22 @@ version: 1
 
 environment:
   php: 8.2
-  node: 21
-
-services:
-  - redis:
-  - mysql: 8.1
+  node: 20
 
 on:
-  pull_request:
-    branches: .*
   push:
     branches:
       - ci
 
+# Add the following 2 pipeline steps to your Chipper CI pipeline:
 pipeline:
-  - name: Setup
+  - name: Configure Forge
     cmd: |
-      cp -v .env
-      composer install -q --no-interaction --prefer-dist --optimize-autoloader
-      php artisan key:generate
-      php artisan migrate:seed
+      echo $SSH_PRIVATE_KEY > ~/.ssh/id_forge
+      chmod 0600 ~/.ssh/id_forge
+      composer global require laravel/forge-cli
 
-  - name: Compile Dev Assets
+  - name: Deploy
     cmd: |
-      npm ci --no-audit
-      npm run dev
-
-  - name: ESLint
-    cmd: npm run lint
-
-  - name: Run Tests
-    cmd: ./vendor/bin/pest
+      forge server:switch your-server-name
+      forge deploy your-site-name.com
