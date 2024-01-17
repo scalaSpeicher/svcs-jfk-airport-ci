@@ -19,9 +19,8 @@ pipeline:
   - name: Setup
     cmd: |
       cp -v .env .env.testing
-      composer install -q --no-interaction --prefer-dist --optimize-autoloader
-      php artisan key:generate
-      php artisan migrate --force
+      composer install --no-interaction --optimize-autoloader
+      php artisan migrate
 
   - name: Compile Dev Assets
     cmd: |
