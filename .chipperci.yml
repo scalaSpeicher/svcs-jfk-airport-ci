@@ -1,23 +1,53 @@
+# Rename this file .chipperci.yml
+# and put it in the root of your project
 version: 1
 
 environment:
   php: 8.2
   node: 20
 
+services:
+  - mysql: 8
+  - redis:
+
 on:
   push:
     branches:
-      - ci
+      - main
 
-# Add the following 2 pipeline steps to your Chipper CI pipeline:
 pipeline:
+  - name: Setup
+    cmd: |
+      cp -v .env.example .env
+
+      composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      php artisan key:generate
+
   - name: Configure Forge
     cmd: |
       echo $SSH_PRIVATE_KEY > ~/.ssh/id_forge
       chmod 0600 ~/.ssh/id_forge
       composer global require laravel/forge-cli
 
+  - name: Assets
+    cmd: |
+      # Typically only needed if your mix-manifest.json file is in .gitignore
+      if [[ -f "yarn.lock" ]]; then
+          yarn
+          yarn build # Vite
+          # yarn dev # Mix
+      else
+          npm ci --no-audit
+          npm run build # Vite
+          # npm run dev # Mix
+      fi
+
+  - name: PHPUnit
+    cmd: |
+      ./vendor/bin/pest
+
   - name: Deploy
     cmd: |
-      forge server:switch your-server-name
-      forge deploy your-site-name.com
+      forge server:switch services-env-01
+      forge deploy jfk-ci.services.scala.com
