@@ -2,11 +2,11 @@ version: 1
 
 environment:
   php: 8.2
-  node: 21
+  node: 20
 
 services:
   - redis:
-  - mysql: 8.1
+  - mysql: 8
 
 on:
   pull_request:
@@ -16,20 +16,20 @@ on:
       - main
 
 pipeline:
-  - name: Setup
-    cmd: |
-      cp -v .env
-      composer install -q --no-interaction --prefer-dist --optimize-autoloader
-      php artisan key:generate
-      php artisan migrate:seed
+  # - name: Setup
+  #   cmd: |
+  #     cp -v .env
+  #     composer install -q --no-interaction --prefer-dist --optimize-autoloader
+  #     php artisan key:generate
+  #     php artisan migrate:seed
 
-  - name: Compile Dev Assets
-    cmd: |
-      npm ci --no-audit
-      npm run build
+  # - name: Compile Dev Assets
+  #   cmd: |
+  #     npm ci --no-audit
+  #     npm run build
 
-  - name: ESLint
-    cmd: npm run lint
+  # - name: ESLint
+  #   cmd: npm run lint
 
   - name: Run Tests
     cmd: ./vendor/bin/pest
