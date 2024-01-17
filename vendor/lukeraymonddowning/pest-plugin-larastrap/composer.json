@@ -1,0 +1,58 @@
+{
+    "name": "lukeraymonddowning/pest-plugin-larastrap",
+    "description": "My awesome plugin",
+    "keywords": [
+        "php",
+        "framework",
+        "pest",
+        "unit",
+        "test",
+        "testing",
+        "plugin"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^8.1 || ^8.2",
+        "pestphp/pest-plugin": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lukeraymonddowning\\Larastrap\\": "src/"
+        }
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.15",
+        "laravel/framework": "^10.0",
+        "orchestra/testbench": "^8.0",
+        "pestphp/pest": "^2.0",
+        "pestphp/pest-dev-tools": "^2.0"
+    },
+    "extra": {
+        "pest": {
+            "plugins": [
+                "Lukeraymonddowning\\Larastrap\\Plugin"
+            ]
+        },
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "scripts": {
+        "lint": "php-cs-fixer fix -v",
+        "test:lint": "php-cs-fixer fix -v --dry-run",
+        "test:types": "phpstan analyse --ansi",
+        "test": [
+            "@test:lint",
+            "@test:types"
+        ]
+    }
+}

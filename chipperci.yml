@@ -1,0 +1,37 @@
+version: 1
+
+environment:
+  php: 8.2
+  node: 21
+
+services:
+  - redis:
+  - mysql: 8.1
+
+on:
+  pull_request:
+    branches: .*
+  push:
+    branches:
+      - dev
+      - staging
+      - main
+
+pipeline:
+  - name: Setup
+    cmd: |
+      cp -v .env
+      composer install -q --no-interaction --prefer-dist --optimize-autoloader
+      php artisan key:generate
+      php artisan migrate:seed
+
+  - name: Compile Dev Assets
+    cmd: |
+      npm ci --no-audit
+      npm run dev
+
+  - name: ESLint
+    cmd: npm run lint
+
+  - name: Run Tests
+    cmd: phpunit

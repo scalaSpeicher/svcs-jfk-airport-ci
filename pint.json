@@ -1,0 +1,138 @@
+{
+    "preset": "laravel",
+    "rules": {
+        "align_multiline_comment": true,
+        "array_indentation": true,
+        "array_syntax": true,
+        "blank_line_after_namespace": true,
+        "blank_line_after_opening_tag": true,
+        "combine_consecutive_issets": true,
+        "combine_consecutive_unsets": true,
+        "concat_space": {
+            "spacing": "one"
+        },
+        "final_class": false,
+        "global_namespace_import": {
+            "import_classes": true,
+            "import_constants": true,
+            "import_functions": true
+        },
+        "is_null": true,
+        "lambda_not_used_import": true,
+        "logical_operators": true,
+        "mb_str_functions": true,
+        "method_chaining_indentation": true,
+        "modernize_strpos": true,
+        "new_with_braces": true,
+        "no_empty_comment": false,
+        "not_operator_with_space": false,
+        "not_operator_with_successor_space": false,
+        "blank_line_before_statement": {
+            "statements": [
+                "return"
+            ]
+        },
+        "no_multiple_statements_per_line": true,
+        "list_syntax": {
+            "syntax": "long"
+        },
+        "no_spaces_inside_parenthesis": true,
+        "no_unreachable_default_argument_value": true,
+        "no_useless_return": true,
+        "no_whitespace_before_comma_in_array": true,
+        "no_whitespace_in_blank_line": true,
+        "normalize_index_brace": true,
+        "object_operator_without_whitespace": true,
+        "psr_autoloading": true,
+        "phpdoc_indent": true,
+        "phpdoc_inline_tag_normalizer": true,
+        "phpdoc_no_access": true,
+        "phpdoc_no_package": true,
+        "phpdoc_no_useless_inheritdoc": true,
+        "phpdoc_scalar": true,
+        "phpdoc_single_line_var_spacing": true,
+        "phpdoc_summary": false,
+        "phpdoc_tag_type": true,
+        "phpdoc_trim": true,
+        "phpdoc_types": true,
+        "phpdoc_var_without_name": true,
+        "self_accessor": true,
+        "short_scalar_cast": true,
+        "simplified_null_return": true,
+        "single_blank_line_at_eof": true,
+        "single_import_per_statement": true,
+        "single_line_after_imports": true,
+        "single_quote": true,
+        "space_after_semicolon": true,
+        "standardize_not_equals": true,
+        "switch_case_semicolon_to_colon": true,
+        "switch_case_space": true,
+        "ternary_operator_spaces": true,
+        "lowercase_cast": true,
+        "lowercase_keywords": true,
+        "lowercase_static_reference": true,
+        "magic_method_casing": true,
+        "magic_constant_casing": true,
+        "unary_operator_spaces": false,
+        "ordered_traits": true,
+        "no_trailing_comma_in_list_call": false,
+        "no_trailing_comma_in_singleline_array": false,
+        "protected_to_private": true,
+        "simplified_if_return": true,
+        "ternary_to_null_coalescing": true,
+        "trim_array_spaces": true,
+        "use_arrow_functions": true,
+        "switch_continue_to_break": true,
+        "void_return": true,
+        "no_unneeded_curly_braces": true,
+        "yoda_style": {
+            "equal": false,
+            "identical": false,
+            "less_and_greater": false
+        },
+        "array_push": true,
+        "assign_null_coalescing_to_coalesce_equal": true,
+        "explicit_indirect_variable": true,
+        "method_argument_space": {
+            "on_multiline": "ensure_fully_multiline"
+        },
+        "modernize_types_casting": false,
+        "no_superfluous_elseif": true,
+        "no_useless_else": true,
+        "no_unneeded_control_parentheses": true,
+        "nullable_type_declaration_for_default_null_value": true,
+        "ordered_imports": {
+            "sort_algorithm": "alpha"
+        },
+        "whitespace_after_comma_in_array": true,
+        "ordered_class_elements": {
+            "order": [
+                "use_trait",
+                "case",
+                "constant",
+                "constant_public",
+                "constant_protected",
+                "constant_private",
+                "property_public",
+                "property_protected",
+                "property_private",
+                "construct",
+                "destruct",
+                "magic",
+                "phpunit",
+                "method_abstract",
+                "method_public_static",
+                "method_public",
+                "method_protected_static",
+                "method_protected",
+                "method_private_static",
+                "method_private"
+            ],
+            "sort_algorithm": "none"
+        }
+    },
+    "notPath": [
+        "app/Http/Controllers/api/AirlineDataController.php",
+        "app/Services/JfkFlightData.php"
+    ]
+}
