@@ -41,4 +41,5 @@ pipeline:
 
   - name: Deploy
     cmd: |
+      forge server:switch services-env-01
       forge deploy jfk-ci.services.scala.com
